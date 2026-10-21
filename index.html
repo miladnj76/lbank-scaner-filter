@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>اسکنر هم‌پوشانی ۸ فیلتر LBank</title>
+<title>اسکنر LBank | هم‌پوشانی ۸ فیلتر</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;padding:14px;background:#0b1020;color:#edf2ff;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif}
@@ -21,7 +21,7 @@ button:disabled{opacity:.5}
 .status{background:#0d1427;border-radius:9px;padding:12px;line-height:1.8;overflow-wrap:anywhere}
 .small{font-size:12px;color:#9eafd0}
 .tablewrap{overflow:auto;margin-top:12px}
-table{border-collapse:collapse;width:100%;min-width:1050px}
+table{border-collapse:collapse;width:100%;min-width:900px}
 th,td{padding:10px 8px;text-align:center;border-bottom:1px solid #293451;font-size:13px}
 th{background:#192541;color:#b9ccff;position:sticky;top:0}
 .score{font-weight:bold;color:#ffd166;font-size:16px}
@@ -30,16 +30,14 @@ th{background:#192541;color:#b9ccff;position:sticky;top:0}
 .tag{display:inline-block;margin:2px;padding:4px 7px;border-radius:7px;background:#26395f;font-size:11px}
 details{margin-top:12px}
 summary{cursor:pointer;color:#b9ccff}
-.pill{display:inline-block;border-radius:7px;padding:4px 7px;background:#263650}
 </style>
 </head>
 <body>
 <main>
 <h1>🔎 اسکنر هم‌پوشانی ۸ فیلتر LBank</h1>
 <p>
-تمام جفت‌ارزهای USDT اسپات دریافت‌شده از LBank بررسی می‌شوند.
-ارزهای با مارکت‌کپ کمتر از ۱۰۰ میلیون دلار یا مارکت‌کپ نامشخص واجد شرایط هستند.
-رتبه‌بندی بر اساس تعداد فیلترهای منطبق انجام می‌شود.
+بدون شرط مارکت‌کپ؛ تمام جفت‌ارزهای USDT دریافتی از LBank بررسی می‌شوند.
+رتبه‌بندی بر اساس تعداد فیلترهای منطبق از ۸ فیلتر است.
 </p>
 
 <div class="panel">
@@ -49,7 +47,7 @@ summary{cursor:pointer;color:#b9ccff}
       <input id="minTurnover" type="number" min="0" value="10000">
     </div>
     <div>
-      <label for="minOverlap">حداقل هم‌پوشانی فیلترها</label>
+      <label for="minOverlap">حداقل هم‌پوشانی</label>
       <select id="minOverlap">
         <option value="0">همه ارزها</option>
         <option value="1">۱ از ۸</option>
@@ -74,24 +72,19 @@ summary{cursor:pointer;color:#b9ccff}
   </div>
 
   <div class="controls" style="margin-top:12px">
-    <button id="scan">▶ شروع اسکن کامل</button>
+    <button id="scan">▶ شروع اسکن</button>
     <button id="stop" class="secondary">توقف اسکن خودکار</button>
   </div>
-
-  <div id="status" class="status" style="margin-top:12px">
-    آماده اسکن.
-  </div>
+  <div id="status" class="status" style="margin-top:12px">آماده اسکن.</div>
   <p class="small">
-    اسکن همه ارزها ممکن است چند دقیقه یا بیشتر طول بکشد. اگر صفحه بسته شود،
-    اسکن متوقف می‌شود. اسکن خودکار فقط تا وقتی صفحه فعال است تلاش می‌کند اجرا شود.
+    اسکن تعداد زیادی ارز زمان می‌برد. اگر صفحه بسته یا Safari متوقف شود،
+    اسکن ادامه پیدا نمی‌کند. اسکن خودکار نیز فقط تا وقتی صفحه فعال است کار می‌کند.
   </p>
 </div>
 
 <div class="panel">
   <strong>📊 گزارش اسکن</strong>
   <p id="summary">هنوز اسکن انجام نشده است.</p>
-  <div id="marketSummary" class="small"></div>
-
   <div class="tablewrap">
     <table>
       <thead>
@@ -99,10 +92,10 @@ summary{cursor:pointer;color:#b9ccff}
           <th>رتبه</th>
           <th>ارز</th>
           <th>هم‌پوشانی</th>
-          <th>مارکت‌کپ</th>
           <th>تغییر ۲۴ساعته</th>
           <th>گردش ۲۴ساعته</th>
           <th>نسبت حجم اخیر</th>
+          <th>تغییر قیمت ۵ دقیقه</th>
           <th>فیلترهای منطبق</th>
         </tr>
       </thead>
@@ -114,24 +107,23 @@ summary{cursor:pointer;color:#b9ccff}
 </div>
 
 <div class="panel">
-  <strong>📌 معیارهای ۸ فیلتر</strong>
+  <strong>📌 قوانین تقریبی ۸ فیلتر</strong>
   <details>
-    <summary>نمایش قوانین استفاده‌شده</summary>
+    <summary>نمایش جزئیات</summary>
     <ol class="small">
-      <li><b>ترکیب انفجار:</b> حجم اخیر حداقل ۲ برابر، حرکت محدود، دامنه فشرده و گردش کافی.</li>
-      <li><b>نشان:</b> افزایش حجم، قیمت در بخش پایینی دامنه ۳۰ کندل و تغییر روزانه محدود.</li>
-      <li><b>الگوی بوم:</b> حجم حداقل ۲٫۵ برابر، حرکت کوتاه‌مدت حداکثر ۲٪ و دامنه فشرده.</li>
-      <li><b>دود:</b> افزایش حجم حداقل ۲ برابر، حرکت محدود و دامنه نسبتاً فشرده.</li>
-      <li><b>میلاد:</b> حجم حداقل ۳ برابر، تغییر روزانه بین منفی ۱۰٪ و مثبت ۱۰٪ و گردش کافی.</li>
-      <li><b>فشار:</b> گردش حداقل ۲۵ هزار دلار، افزایش حجم و حرکت محدود.</li>
-      <li><b>آخر:</b> گردش بین ۱۰ هزار تا ۵۰۰ هزار دلار، افزایش حجم و دامنه محدود.</li>
-      <li><b>جی:</b> گردش بین ۱۰ هزار تا یک میلیون دلار، افزایش حجم و دامنه فشرده.</li>
+      <li><b>ترکیب انفجار:</b> افزایش حجم، حرکت محدود، دامنه فشرده و گردش کافی.</li>
+      <li><b>نشان:</b> افزایش حجم، قیمت در بخش پایینی دامنه کندل‌ها و تغییر روزانه محدود.</li>
+      <li><b>الگوی بوم:</b> افزایش شدید حجم و حرکت کوتاه‌مدت محدود.</li>
+      <li><b>دود:</b> افزایش حجم، عقب‌ماندگی قیمت و دامنه نسبتاً فشرده.</li>
+      <li><b>میلاد:</b> افزایش حجم و تغییر روزانه بین منفی ۱۰٪ و مثبت ۱۰٪.</li>
+      <li><b>فشار:</b> گردش مناسب، افزایش حجم و حرکت محدود.</li>
+      <li><b>آخر:</b> گردش محدود، افزایش حجم و دامنه فشرده.</li>
+      <li><b>جی:</b> گردش و افزایش حجم همراه با دامنه فشرده.</li>
     </ol>
   </details>
   <p class="small">
-    این آستانه‌ها نسخه عملیاتی تقریبی هستند، نه بازیابی کامل همه قوانین تاریخی.
-    داده‌های عمق سفارشات، مارکت‌کپ معتبر برای تک‌تک نمادها و جذب واقعی سفارش‌های فروش
-    مستقیماً از این اسکن تأیید نمی‌شوند. امتیاز هم‌پوشانی تضمین پامپ نیست.
+    این‌ها پیاده‌سازی تقریبی فیلترها هستند. داده حجم کندل‌ها، به‌تنهایی،
+    جذب واقعی سفارش‌های فروش یا وجود پامپ آینده را اثبات نمی‌کند.
   </p>
 </div>
 </main>
@@ -141,7 +133,6 @@ summary{cursor:pointer;color:#b9ccff}
 
 const API = "https://api.lbkex.com/v2/";
 const PROXY = "https://proxy.cors.dev/";
-const CG_API = "https://api.coingecko.com/api/v3/";
 const $ = id => document.getElementById(id);
 
 let busy = false;
@@ -157,42 +148,74 @@ function n(v) {
   return Number.isFinite(x) ? x : 0;
 }
 
-function fmt(v, max = 2) {
+function fmt(v, max=2) {
   return Number(v).toLocaleString("en-US", {
-    maximumFractionDigits: max
+    maximumFractionDigits:max
   });
 }
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
   })[c]);
 }
 
-async function getJSON(url) {
-  let directError = "";
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-  try {
-    const r = await fetch(url, {cache:"no-store"});
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    return await r.json();
-  } catch(e) {
-    directError = e.message || "خطای اتصال مستقیم";
+/*
+ * ابتدا API مستقیم امتحان می‌شود.
+ * اگر مرورگر اجازه ندهد، پراکسی جایگزین امتحان می‌شود.
+ * خطای 429 با فاصله زمانی محدود دوباره امتحان می‌شود.
+ */
+async function fetchRetry(url, useProxy=false) {
+  let lastError;
+
+  for (let attempt=0; attempt<3; attempt++) {
+    if (stopRequested) throw new Error("اسکن متوقف شده است.");
+
+    try {
+      const target = useProxy ? PROXY + url : url;
+      const response = await fetch(target, {cache:"no-store"});
+
+      if (response.status === 429) {
+        lastError = new Error("HTTP 429؛ محدودیت تعداد درخواست‌ها");
+        await wait(2000 * (attempt + 1));
+        continue;
+      }
+
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+
+      return await response.json();
+    } catch(e) {
+      lastError = e;
+      if (attempt < 2) await wait(1000 * (attempt + 1));
+    }
   }
 
+  throw lastError || new Error("دریافت داده ناموفق بود.");
+}
+
+async function getJSON(url) {
   try {
-    const r = await fetch(PROXY + url, {cache:"no-store"});
-    if (!r.ok) throw new Error("Proxy HTTP " + r.status);
-    return await r.json();
-  } catch(e) {
-    throw new Error(
-      "اتصال ناموفق؛ مستقیم: " + directError +
-      "؛ پراکسی: " + (e.message || "Load failed")
-    );
+    return await fetchRetry(url, false);
+  } catch(directError) {
+    if (stopRequested) throw directError;
+
+    try {
+      return await fetchRetry(url, true);
+    } catch(proxyError) {
+      throw new Error(
+        "اتصال ناموفق؛ مستقیم: " +
+        (directError.message || "خطا") +
+        "؛ پراکسی: " +
+        (proxyError.message || "خطا")
+      );
+    }
   }
 }
 
@@ -208,9 +231,7 @@ async function getTickers() {
   const d = dataOf(j);
 
   if (!Array.isArray(d)) {
-    throw new Error(
-      "فهرست ارزها از API دریافت نشد؛ پاسخ symbol=all قابل استفاده نیست."
-    );
+    throw new Error("فهرست جفت‌ارزها از LBank دریافت نشد.");
   }
 
   const map = new Map();
@@ -237,61 +258,8 @@ async function getTickers() {
   return [...map.values()];
 }
 
-/*
- * مارکت‌کپ عمومی CoinGecko.
- * اگر نماد تکراری باشد، آن نماد عمداً نامشخص باقی می‌ماند.
- * خطای دریافت منبع مارکت‌کپ با «مارکت‌کپ نامشخص واقعی» یکی نیست:
- * اگر دریافت کامل منبع شکست بخورد، اسکن متوقف می‌شود تا
- * تمام ارزهای بزرگ اشتباهاً به عنوان نامشخص وارد نشوند.
- */
-async function getMarketCaps() {
-  const caps = new Map();
-  const ambiguous = new Set();
-  let pagesFetched = 0;
-
-  for (let page = 1; page <= 10; page++) {
-    if (stopRequested) throw new Error("اسکن به درخواست کاربر متوقف شد.");
-
-    status(`دریافت مارکت‌کپ CoinGecko: صفحه ${page} از ۱۰`);
-
-    const url = CG_API +
-      "coins/markets?vs_currency=usd&order=market_cap_desc" +
-      "&per_page=250&page=" + page +
-      "&sparkline=false";
-
-    const data = await getJSON(url);
-
-    if (!Array.isArray(data)) {
-      throw new Error("پاسخ CoinGecko قابل شناسایی نیست.");
-    }
-
-    pagesFetched++;
-
-    for (const coin of data) {
-      const symbol = String(coin.symbol || "").toLowerCase();
-      const cap = Number(coin.market_cap);
-
-      if (!symbol || !Number.isFinite(cap) || cap <= 0) continue;
-
-      if (caps.has(symbol)) {
-        ambiguous.add(symbol);
-      } else {
-        caps.set(symbol, cap);
-      }
-    }
-
-    if (data.length < 250) break;
-  }
-
-  for (const symbol of ambiguous) caps.delete(symbol);
-
-  return {caps, pagesFetched, ambiguousCount:ambiguous.size};
-}
-
 async function getCandles(symbol) {
-  const now = Math.floor(Date.now() / 60000) * 60;
-  const start = now - 29 * 60;
-
+  const start = Math.floor(Date.now()/60000)*60 - 29*60;
   const url = API + "kline.do?symbol=" +
     encodeURIComponent(symbol) +
     "&type=minute1&size=30&time=" + start;
@@ -316,77 +284,52 @@ function evaluate(coin, candles) {
     throw new Error("کندل کافی نیست");
   }
 
-  const last = candles[candles.length - 1];
+  const last = candles[candles.length-1];
   const recent = candles.slice(-5);
-  const previous = candles.slice(0, -5);
+  const previous = candles.slice(0,-5);
 
-  const avgRecent = recent.reduce((s,x)=>s+x.volume,0) / recent.length;
-  const avgPrevious = previous.reduce((s,x)=>s+x.volume,0) / previous.length;
+  const avgRecent =
+    recent.reduce((s,x)=>s+x.volume,0) / recent.length;
+  const avgPrevious =
+    previous.reduce((s,x)=>s+x.volume,0) / previous.length;
 
-  const volumeRatio = avgPrevious > 0 ? avgRecent / avgPrevious : 0;
+  const volumeRatio =
+    avgPrevious > 0 ? avgRecent/avgPrevious : 0;
 
   const maxHigh = Math.max(...candles.map(x=>x.high));
   const minLow = Math.min(...candles.map(x=>x.low));
 
   const rangePct = last.close > 0
-    ? (maxHigh-minLow) / last.close * 100
-    : 999;
+    ? (maxHigh-minLow)/last.close*100 : 999;
 
   const position = maxHigh > minLow
-    ? (last.close-minLow) / (maxHigh-minLow)
-    : 0.5;
+    ? (last.close-minLow)/(maxHigh-minLow) : 0.5;
 
   const firstRecent = recent[0].open || recent[0].close;
   const move5 = firstRecent > 0
-    ? (last.close/firstRecent-1)*100
-    : 0;
+    ? (last.close/firstRecent-1)*100 : 0;
 
   const absMove = Math.abs(move5);
   const turn = coin.turnover;
-  const ch24 = coin.change;
-  const inDailyBand = ch24 >= -10 && ch24 <= 10;
+  const inDailyBand = coin.change >= -10 && coin.change <= 10;
 
   const tests = [
-    {
-      name:"ترکیب انفجار",
-      ok:volumeRatio>=2 && absMove<=3 &&
-         rangePct<=6 && turn>=10000
-    },
-    {
-      name:"نشان",
-      ok:volumeRatio>=1.5 && position<=0.45 &&
-         inDailyBand
-    },
-    {
-      name:"الگوی بوم",
-      ok:volumeRatio>=2.5 && absMove<=2 &&
-         rangePct<=3.5
-    },
-    {
-      name:"دود",
-      ok:volumeRatio>=2 && absMove<=2.5 &&
-         rangePct<=5 && position<=0.65
-    },
-    {
-      name:"میلاد",
-      ok:volumeRatio>=3 && inDailyBand &&
-         turn>=10000
-    },
-    {
-      name:"فشار",
-      ok:turn>=25000 && volumeRatio>=1.5 &&
-         absMove<=2
-    },
-    {
-      name:"آخر",
-      ok:turn>=10000 && turn<=500000 &&
-         volumeRatio>=2 && rangePct<=4
-    },
-    {
-      name:"جی",
-      ok:turn>=10000 && turn<=1000000 &&
-         volumeRatio>=2 && rangePct<=3
-    }
+    {name:"ترکیب انفجار",
+     ok:volumeRatio>=2 && absMove<=3 && rangePct<=6 && turn>=10000},
+    {name:"نشان",
+     ok:volumeRatio>=1.5 && position<=0.45 && inDailyBand},
+    {name:"الگوی بوم",
+     ok:volumeRatio>=2.5 && absMove<=2 && rangePct<=3.5},
+    {name:"دود",
+     ok:volumeRatio>=2 && absMove<=2.5 && rangePct<=5 && position<=0.65},
+    {name:"میلاد",
+     ok:volumeRatio>=3 && inDailyBand && turn>=10000},
+    {name:"فشار",
+     ok:turn>=25000 && volumeRatio>=1.5 && absMove<=2},
+    {name:"آخر",
+     ok:turn>=10000 && turn<=500000 && volumeRatio>=2 && rangePct<=4},
+    {name:"جی",
+     ok:turn>=10000 && turn<=1000000 && volumeRatio>=2 && rangePct<=3}
   ];
 
   const matches = tests.filter(x=>x.ok).map(x=>x.name);
@@ -398,14 +341,14 @@ function evaluate(coin, candles) {
     move5,
     position,
     matches,
-    overlap:matches.length,
-    candleCount:candles.length
+    overlap:matches.length
   };
 }
 
 async function mapLimit(items, limit, worker) {
   const out = new Array(items.length);
   let next = 0;
+  let done = 0;
 
   async function runner() {
     while (true) {
@@ -422,6 +365,12 @@ async function mapLimit(items, limit, worker) {
           error:e.message || "خطا"
         };
       }
+
+      done++;
+      status(`بررسی کندل‌ها: ${done}/${items.length}`);
+
+      // فاصله کوتاه بین درخواست‌ها برای کاهش فشار روی API
+      await wait(350);
     }
   }
 
@@ -445,26 +394,22 @@ function render(rows) {
 
   if (!list.length) {
     $("results").innerHTML =
-      '<tr><td colspan="8">ارزی با این حداقل هم‌پوشانی پیدا نشد. حداقل را کاهش بده.</td></tr>';
+      '<tr><td colspan="8">ارزی با این حداقل هم‌پوشانی پیدا نشد؛ حداقل را کاهش بده.</td></tr>';
     return 0;
   }
 
-  $("results").innerHTML = list.map((x,i)=>{
-    const capText = x.marketCap == null
-      ? '<span class="pill">نامشخص</span>'
-      : "$" + esc(fmt(x.marketCap,0));
-
-    return `<tr>
+  $("results").innerHTML = list.map((x,i)=>`
+    <tr>
       <td>${i+1}</td>
       <td><b>${esc(x.symbol.toUpperCase())}</b></td>
       <td class="score">${x.overlap}/8</td>
-      <td>${capText}</td>
       <td class="${x.change>=0?"good":"bad"}">${fmt(x.change)}٪</td>
       <td>${fmt(x.turnover)} USDT</td>
       <td>${fmt(x.volumeRatio)}×</td>
-      <td>${x.matches.map(m=>`<span class="tag">${esc(m)}</span>`).join("")||"—"}</td>
-    </tr>`;
-  }).join("");
+      <td class="${x.move5>=0?"good":"bad"}">${fmt(x.move5)}٪</td>
+      <td>${x.matches.map(m=>`<span class="tag">${esc(m)}</span>`).join("") || "—"}</td>
+    </tr>
+  `).join("");
 
   return list.length;
 }
@@ -479,118 +424,67 @@ async function scan() {
     '<tr><td colspan="8">در حال شروع اسکن...</td></tr>';
 
   try {
-    status("مرحله ۱: دریافت فهرست جفت‌ارزهای LBank...");
+    status("مرحله ۱: دریافت همه جفت‌ارزهای USDT از LBank...");
     const all = await getTickers();
 
     if (!all.length) {
       throw new Error("هیچ جفت‌ارز USDT دریافت نشد.");
     }
 
-    status(`مرحله ۲: دریافت مارکت‌کپ برای فهرست ${all.length} جفت‌ارز...`);
-    const market = await getMarketCaps();
-
     const minTurn = Math.max(0,n($("minTurnover").value));
 
-    /*
-     * تطبیق بر اساس نماد پایه.
-     * اگر نماد در CoinGecko پیدا نشود یا مبهم باشد،
-     * مارکت‌کپ نامشخص محسوب می‌شود و ارز حفظ خواهد شد.
-     */
-    const eligible = all
+    const candidates = all
       .filter(x=>x.turnover>=minTurn)
-      .map(x=>{
-        const base = x.symbol.replace(/_usdt$/,"").toLowerCase();
-        const cap = market.caps.has(base)
-          ? market.caps.get(base)
-          : null;
-
-        return {
-          ...x,
-          marketCap:cap,
-          marketCapStatus:cap==null
-            ?"نامشخص"
-            :cap<100000000
-              ?"زیر ۱۰۰ میلیون دلار"
-              :"۱۰۰ میلیون دلار یا بیشتر"
-        };
-      })
-      .filter(x=>x.marketCap==null || x.marketCap<100000000)
       .sort((a,b)=>b.turnover-a.turnover);
 
-    $("marketSummary").textContent =
-      `جفت‌ارزهای دریافتی: ${all.length} | `+
-      `واجد شرایط پیش از فیلتر گردش: ${eligible.length} | `+
-      `نمادهای مبهم در منبع مارکت‌کپ: ${market.ambiguousCount} | `+
-      `صفحات مارکت‌کپ دریافت‌شده: ${market.pagesFetched}`;
+    $("summary").textContent =
+      `جفت‌ارزهای USDT دریافت‌شده: ${all.length} | `+
+      `پس از فیلتر حداقل گردش: ${candidates.length}`;
 
-    if (!eligible.length) {
-      throw new Error("هیچ ارز واجد شرایطی با این حداقل گردش پیدا نشد.");
+    if (!candidates.length) {
+      throw new Error("ارزی با حداقل گردش انتخاب‌شده پیدا نشد.");
     }
 
-    status(`مرحله ۳: بررسی کندل‌های ${eligible.length} جفت‌ارز واجد شرایط...`);
+    status(`مرحله ۲: بررسی کندل‌های ${candidates.length} جفت‌ارز...`);
 
-    let done = 0;
-
-    const raw = await mapLimit(eligible,4,async coin=>{
+    // فقط دو درخواست کندل هم‌زمان؛ برای کاهش احتمال 429
+    const raw = await mapLimit(candidates,2,async coin=>{
       const candles = await getCandles(coin.symbol);
-      done++;
-
-      status(`در حال بررسی کندل‌ها: ${done}/${eligible.length}`);
-
       if (candles.length < 20) {
         throw new Error("کمتر از ۲۰ کندل معتبر دریافت شد.");
       }
-
       return evaluate(coin,candles);
     });
-
-    if (stopRequested) {
-      status("اسکن به درخواست کاربر متوقف شد. نتایج موجود ناقص‌اند.");
-    }
 
     const errors = raw.filter(x=>x && x.error);
     const valid = raw.filter(x=>x && !x.error);
     const shown = render(valid);
-
     const maxOverlap = valid.reduce(
       (m,x)=>Math.max(m,x.overlap),0
     );
 
-    const unknownCaps = eligible.filter(x=>x.marketCap==null).length;
-    const lowCaps = eligible.filter(
-      x=>x.marketCap!=null && x.marketCap<100000000
-    ).length;
-
     $("summary").textContent =
-      `جفت‌ارزهای دریافت‌شده: ${all.length} | `+
-      `واجد شرایط مارکت‌کپ/گردش: ${eligible.length} | `+
-      `بررسی کندل موفق: ${valid.length} | `+
+      `جفت‌ارزهای USDT دریافت‌شده: ${all.length} | `+
+      `واجد شرایط گردش: ${candidates.length} | `+
+      `بررسی موفق: ${valid.length} | `+
       `خطا یا کندل ناکافی: ${errors.length} | `+
-      `نمایش با حداقل هم‌پوشانی فعلی: ${shown} | `+
+      `تعداد نمایش‌داده‌شده: ${shown} | `+
       `بیشترین هم‌پوشانی: ${maxOverlap}/8`;
 
-    $("marketSummary").textContent +=
-      ` | زیر ۱۰۰ میلیون دلار بر اساس تطبیق نماد: ${lowCaps}`+
-      ` | مارکت‌کپ نامشخص: ${unknownCaps}`;
-
-    if (errors.length) {
-      status(
-        `اسکن با نتیجه ناقص پایان یافت: ${valid.length} موفق و `+
-        `${errors.length} خطادار. تعداد واقعی بررسی موفق در گزارش آمده است.`
-      );
+    if (stopRequested) {
+      status("توقف درخواست شد؛ نتایج موجود ممکن است ناقص باشند.");
+    } else if (errors.length) {
+      status(`اسکن ناقص: ${valid.length} ارز موفق، ${errors.length} ارز خطادار. خطاهای پراکسی یا API را بررسی کن.`);
     } else {
-      status(
-        `اسکن پایان یافت؛ ${valid.length} ارز با کندل کافی بررسی شد. `+
-        `آخرین دریافت: ${new Date().toLocaleTimeString("fa-IR")}`
-      );
+      status(`اسکن پایان یافت؛ ${valid.length} ارز با کندل کافی بررسی شد.`);
     }
 
   } catch(e) {
-    status("خطا: "+(e.message||"دریافت داده ناموفق بود"));
+    status("خطا: " + (e.message || "دریافت داده ناموفق بود"));
     $("summary").textContent =
-      "اسکن کامل نشد. خطا در بالا نمایش داده شده است.";
+      "اسکن کامل نشد؛ تعداد واقعی بررسی موفق در گزارش مشخص می‌شود.";
     $("results").innerHTML =
-      '<tr><td colspan="8">اسکن کامل نشد؛ نتیجه ناقص را به‌عنوان اسکن کامل در نظر نگیر.</td></tr>';
+      '<tr><td colspan="8">اسکن کامل نشد؛ نتیجه ناقص را اسکن کامل در نظر نگیر.</td></tr>';
   } finally {
     busy = false;
     $("scan").disabled = false;
